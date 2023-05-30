@@ -34,7 +34,7 @@ export default function Home() {
     setIdInterval(idInterval);
   }
   
-  const onInputChange = async (e, set) => {
+  const onInputChange = async (e:any, set:any) => {
     const {name, value} = e.target;
     if(!isNaN(value)){
       set(Number.parseFloat(value));  
