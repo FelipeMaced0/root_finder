@@ -84,7 +84,7 @@ export function *falsePosition(input: FunctionInput){
         current_error = calculateError(root_estimative, previous_root_estimative);
         previous_root_estimative = root_estimative;
 
-        yield {k: k, interval:[{x:begin, y:0}, {x:end, y:0}], root:[{x:root_estimative, y:0}], f_x: func(root_estimative), estimative_error: current_error};
+        yield {k: k, interval:[{x:begin, y:0}, {x:end, y:0}], root:[{x:root_estimative, y:0}], f_x: func(fun_exp, root_estimative), estimative_error: current_error};
         
         //Cha
         //current_error = Math.abs(root_estimative-previous_root_estimative)/Math.abs(root_estimative);
