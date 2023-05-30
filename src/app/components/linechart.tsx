@@ -29,7 +29,7 @@ export const options = {
       position: 'top' as const,
     },
     title: {
-      display: true,
+      display: false,
       text: 'Chart of Function',
     },
   },
@@ -37,20 +37,17 @@ export const options = {
     y: {
      position: "center",
     },
-    x: {
-      position: "center",
-    },
   },
 };
 
 export default function LineChart(props:any) {
 
     const data = {
-      labels: [-10,2,5,6,0],
+      labels: props?.data[0],
         datasets: [
             {
-            label: 'Dataset 1',
-            data: [-10,2,5,6,0],
+            label: props.name,
+            data: props?.data[1],
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },

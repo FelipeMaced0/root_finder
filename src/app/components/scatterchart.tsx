@@ -31,21 +31,6 @@ export const options = {
   },
 };
 
-/*
-export const data = {
-  datasets: [
-    {
-      label: 'A dataset',
-      data: Array.from({ length: 100 }, () => ({
-        x: faker.number.int({ min: -100, max: 100 }),
-        y: faker.number.int({ min: -100, max: 100 }),
-      })),
-      backgroundColor: 'rgba(255, 99, 132, 1)',
-    },
-  ],
-};
-*/
-
 const ScatterChart = (props:any) => {
   const data = {
     datasets: [
@@ -56,7 +41,7 @@ const ScatterChart = (props:any) => {
         pointStyle: "rectRot"
       },
       {
-        label: 'ROOT_EXTIMATIVE',
+        label: 'ROOT',
         data: props? props.root: [{x:0, y:0}],
         backgroundColor: 'rgba(99, 255, 107, 1)',
         pointRadius: 5,
