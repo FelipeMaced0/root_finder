@@ -33,11 +33,7 @@ export const options = {
       text: 'Chart of Function',
     },
   },
-  scales: {
-    y: {
-     position: "center",
-    },
-  },
+ 
 };
 
 export default function LineChart(props:any) {
