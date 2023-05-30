@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect} from 'react';
+import { Fragment, useContext, useEffect, useState} from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import {functionElement} from '../functions/functions';
@@ -12,14 +12,15 @@ function classNames(...classes:any) {
 
 export default function SelectMenuMethod(props:any) {
   const {rootFindingMethod, setRootFindingMethod} = useContext(SelectedContext);
+  const [selected, setSelected] = useState(props.list[0]);
 
   useEffect(() => {
-    setRootFindingMethod(props.list[0]);
-  }, []);
+    setRootFindingMethod(selected);
+  }, [selected]);
   
   return (
 
-    <Listbox defaultValue={rootFindingMethod} onChange={setRootFindingMethod}>
+    <Listbox defaultValue={selected} onChange={setSelected}>
       {({ open }) => (
         <>
           <Listbox.Label className="block text-sm font-medium leading-6 text-white-900 font-black">Root Finding Method</Listbox.Label>
@@ -27,7 +28,7 @@ export default function SelectMenuMethod(props:any) {
             <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
               <span className="flex items-center">
                 <Image src="/function.png" alt="function icon" width={50} height={50} className="h-5 w-5 flex-shrink-0 rounded-full" />
-                <span className="ml-3 block truncate">{rootFindingMethod?.name}</span>
+                <span className="ml-3 block truncate">{selected?.name}</span>
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -53,19 +54,19 @@ export default function SelectMenuMethod(props:any) {
                     }
                     value={element}
                   >
-                    {({ rootFindingMethod, active }) => (
+                    {({selected, active }) => (
                       <>
                         <div className="flex items-center">
                         <Image src="/function.png" alt="function icon" width={50} height={50} className="h-5 w-5 flex-shrink-0 rounded-full" />
                           
                           <span
-                            className={classNames(rootFindingMethod ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
+                            className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
                           >
                             {element.name}
                           </span>
                         </div>
 
-                        {rootFindingMethod ? (
+                        {selected ? (
                           <span
                             className={classNames(
                               active ? 'text-white' : 'text-indigo-600',
