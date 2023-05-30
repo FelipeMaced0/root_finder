@@ -27,8 +27,8 @@ export default function Home() {
       currentIter = generator?.next();
       if (!currentIter?.done && currentIter !== undefined) {
         setData(currentIter?.value);
-      }else{
-        clearInterval(idInterval);
+      }else if(currentIter?.done && currentIter !== undefined){
+        unsetInterval();
       }
     }, 3000);
     setIdInterval(idInterval);
@@ -47,21 +47,21 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col justify-between p-10">
+    <main className="flex min-h-screen flex-col justify-between p-10 bg-black text-white">
       <div className="z-10 w-full justify-between font-mono text-sm lg:flex">
         <div className='flex flex-col justify-between h-2 w-22 space-y-3'>
           <div className="flex flex-col space-between rounded border border-solid border-neutral-300 p-5">
             <span>Iteration:{data?.k}</span>
-            <span>Root: {data?.root[0].x.toPrecision(6)}</span>
-            <span>Error%: {data?.estimative_error.toPrecision(6)}</span>
+            <span>Root: {data?.root[0].x.toFixed(6)}</span>
+            <span>Error%: {data?.estimative_error.toFixed(6)}</span>
           </div>
           <SelectMenu list={Functions.ALLFUNCTIONS} />
           <SelectMenuMethod list={allMethods} />
-          <div className='in'>
+          <div>
             <span>Interval</span>
             <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                <input type="text" pattern="\d+" value={intervalA} onChange={(e)=>onInputChange(e, setIntevalA)} className="relative m-0 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" placeholder="a"/>
-                <input type="text" pattern="\d+" value={intervalB} onChange={(e)=>onInputChange(e, setIntevalB)} className="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" placeholder="b"/>
+                <input type="text" pattern="\d+" defaultValue={intervalA} onChange={(e)=>onInputChange(e, setIntevalA)} className="relative m-0 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" placeholder="a"/>
+                <input type="text" pattern="\d+" defaultValue={intervalB} onChange={(e)=>onInputChange(e, setIntevalB)} className="relative m-0 block w-[1px] min-w-0 flex-auto rounded-r border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" placeholder="b"/>
             </div>
             <button onClick={()=>{!idInterval?findRoot():unsetInterval()}} className="rounded bg-emerald-300 p-3 text-black"> {!idInterval?"Find Root":"Stop"}</button>
           </div>
@@ -70,7 +70,7 @@ export default function Home() {
           <div style={{ width: 500, height: 500 }}>
             <ScatterChart root={data?.root} bounderies={data?.interval} />
           </div>
-          <div style={{ width: 500, height: 500 }}>
+          <div style={{ width: 500, height: 800 }}>
             <LineChart name={selectedFunction?.name} data={calculateFunction(selectedFunction ? selectedFunction.value : "")} />
           </div>
         </div>
