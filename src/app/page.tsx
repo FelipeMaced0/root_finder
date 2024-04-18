@@ -79,7 +79,6 @@ export default function Home() {
         show: true,
         type: 'inside',
         filterMode: 'none',
-        moveOnMouseMove: false,
         xAxisIndex: [0],
         startValue: -20,
         endValue: 20
@@ -88,7 +87,6 @@ export default function Home() {
         show: true,
         type: 'inside',
         filterMode: 'none',
-        moveOnMouseMove: false,
         yAxisIndex: [0],
         startValue: -20,
         endValue: 20
