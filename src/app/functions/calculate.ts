@@ -4,12 +4,14 @@ function func(f:string, x:number){
 }
 
 export default function calculateFunction(funcString: string){    
-    let data:Array<Array<Number>>=[[],[]];
+    let data:Array<Array<Number>>=[];
 
-    if(funcString===""){return[]};
-    for(let x=-10;x<11;x=x+0.1){
-        data[0].push(x);
-        data[1].push(func(funcString, x));
+    if(funcString===""){
+        return data;
+    };
+
+    for(let x=-200; x<200; x = x+0.1){
+        data.push([x, func(funcString, x)]);
     }
     
     return data;
